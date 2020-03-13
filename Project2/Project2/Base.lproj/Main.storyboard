@@ -15,37 +15,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUt-hI-s8v">
-                                <rect key="frame" x="107" y="230" width="200" height="100"/>
-                                <state key="normal" image="us"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ep2-t3-CYF">
-                                <rect key="frame" x="107" y="360" width="200" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="wz6-wG-DG8"/>
-                                </constraints>
-                                <state key="normal" image="us"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVo-tO-yvt">
-                                <rect key="frame" x="107" y="100" width="200" height="100"/>
+                                <rect key="frame" x="107" y="275" width="200" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="vfZ-qC-bzN"/>
                                 </constraints>
                                 <state key="normal" image="us"/>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rdt-MM-QSH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUt-hI-s8v">
+                                <rect key="frame" x="107" y="425" width="200" height="100"/>
+                                <state key="normal" image="us"/>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wlh-Rt-qbu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ep2-t3-CYF">
+                                <rect key="frame" x="107" y="575" width="200" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="wz6-wG-DG8"/>
+                                </constraints>
+                                <state key="normal" image="us"/>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9rZ-mG-n2O"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="HVo-tO-yvt" firstAttribute="leading" secondItem="ep2-t3-CYF" secondAttribute="leading" id="7ai-Mn-5vE"/>
-                            <constraint firstItem="HVo-tO-yvt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="AbR-nK-K6c"/>
-                            <constraint firstItem="rUt-hI-s8v" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="MqL-Pi-KgR"/>
-                            <constraint firstItem="HVo-tO-yvt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="107" id="W1C-oM-hoe"/>
-                            <constraint firstItem="rUt-hI-s8v" firstAttribute="top" secondItem="HVo-tO-yvt" secondAttribute="bottom" constant="30" id="Whe-yA-YOA"/>
-                            <constraint firstItem="ep2-t3-CYF" firstAttribute="top" secondItem="rUt-hI-s8v" secondAttribute="bottom" constant="30" id="acv-hS-D7D"/>
-                            <constraint firstItem="ep2-t3-CYF" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="bRh-Ug-fhm"/>
-                            <constraint firstItem="HVo-tO-yvt" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="czA-Y0-urE"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ep2-t3-CYF" secondAttribute="bottom" constant="402" id="hRA-Hh-IOe"/>
-                            <constraint firstItem="HVo-tO-yvt" firstAttribute="leading" secondItem="rUt-hI-s8v" secondAttribute="leading" id="xgY-5N-lpS"/>
+                            <constraint firstItem="rUt-hI-s8v" firstAttribute="top" secondItem="HVo-tO-yvt" secondAttribute="bottom" constant="50" id="1sf-FK-JuE"/>
+                            <constraint firstItem="ep2-t3-CYF" firstAttribute="top" secondItem="rUt-hI-s8v" secondAttribute="bottom" constant="50" id="GSN-di-Jbb"/>
+                            <constraint firstItem="rUt-hI-s8v" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ktZ-VM-IGc"/>
+                            <constraint firstItem="rUt-hI-s8v" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="ktc-2o-7PC"/>
+                            <constraint firstItem="ep2-t3-CYF" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="oqk-AW-2Do"/>
+                            <constraint firstItem="HVo-tO-yvt" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="vtl-oo-kbA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
