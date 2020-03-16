@@ -16,26 +16,25 @@ class HomeViewController: UITableViewController {
     
     lazy var webSites = makeWebsites()
     
-    
+    //number of rows in the table
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return webSites.count
     }
     
+    //Insert a row into the table
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StoryboardId.cellReuse)!
-        
         cell.textLabel?.text = webSites[indexPath.row].displayName
-        
         return cell
     }
     
+    //Click on a row in the table
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let viewController = storyboard?.instantiateViewController(withIdentifier: StoryboardId.websiteViewController) as? WebsiteViewController else {
             return
         }
-
         viewController.website = webSites[indexPath.row]
-
+        //creates new view
         navigationController?.pushViewController(viewController, animated: true)
     }
     

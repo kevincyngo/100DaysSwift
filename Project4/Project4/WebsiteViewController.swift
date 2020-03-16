@@ -36,19 +36,19 @@ class WebsiteViewController: UIViewController {
         observeProgress()
     }
     
-    
+    //Observer to check the progress of the page load
     func observeProgress() {
         progressObserver = self.observe(\.webView.estimatedProgress) { [unowned self] (_, _) in
             self.progressView.progress = Float(self.webView.estimatedProgress)
         }
     }
     
+    //Toolbar (bar at bottom of screen) setup
     func setupToolbar() {
         progressView = UIProgressView(progressViewStyle: .default)
         progressView.sizeToFit()
         
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
         let progressButton = UIBarButtonItem(customView: progressView)
         let backButton = UIBarButtonItem(title: "◀️", style: .plain, target: webView, action: #selector(webView.goBack))
         let forwardButton = UIBarButtonItem(title: "▶️", style: .plain, target: webView, action: #selector(webView.goForward))
@@ -59,8 +59,7 @@ class WebsiteViewController: UIViewController {
         navigationController?.isToolbarHidden = false
     }
     
-    
-
+    //Alert to be displayed when visiting blocked site
     func displayUnauthorizedSiteAlert() {
         let alertController = UIAlertController(
             title: "Unauthorized Host 🛑",
@@ -74,7 +73,7 @@ class WebsiteViewController: UIViewController {
     }
     
 }
-
+//Ran when site is visited to check if site is blocked or not
 extension WebsiteViewController: WKNavigationDelegate {
     func webView(
         _ webView: WKWebView,
@@ -96,7 +95,7 @@ extension WebsiteViewController: WKNavigationDelegate {
         displayUnauthorizedSiteAlert()
     }
     
-    
+    //Called when navigation is complete
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         title = webView.title
     }
