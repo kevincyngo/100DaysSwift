@@ -37,6 +37,7 @@ class WebsiteViewController: UIViewController {
     }
     
     //Observer to check the progress of the page load
+    //Tells you when an observed value has changed
     func observeProgress() {
         progressObserver = self.observe(\.webView.estimatedProgress) { [unowned self] (_, _) in
             self.progressView.progress = Float(self.webView.estimatedProgress)
