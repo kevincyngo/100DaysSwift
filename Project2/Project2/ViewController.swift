@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     var correctAnswer = 0
     var questionsAsked = 0
     var wrongMessage = ""
+    let metrics = ["labelHeight": 88]
     
     override func viewDidLoad() {
         super.viewDidLoad()
