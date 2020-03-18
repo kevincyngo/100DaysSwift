@@ -18,6 +18,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVo-tO-yvt">
                                 <rect key="frame" x="107" y="275" width="200" height="100"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="HVo-tO-yvt" secondAttribute="height" multiplier="2:1" id="6G1-4x-ca9"/>
                                     <constraint firstAttribute="height" constant="100" id="vfZ-qC-bzN"/>
                                 </constraints>
                                 <state key="normal" image="us"/>
@@ -27,6 +28,9 @@
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUt-hI-s8v">
                                 <rect key="frame" x="107" y="425" width="200" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="rUt-hI-s8v" secondAttribute="height" multiplier="2:1" id="nfc-y9-L3X"/>
+                                </constraints>
                                 <state key="normal" image="us"/>
                                 <connections>
                                     <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wlh-Rt-qbu"/>
@@ -35,6 +39,7 @@
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ep2-t3-CYF">
                                 <rect key="frame" x="107" y="575" width="200" height="100"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="ep2-t3-CYF" secondAttribute="height" multiplier="2:1" id="06Q-wf-FX1"/>
                                     <constraint firstAttribute="height" constant="100" id="wz6-wG-DG8"/>
                                 </constraints>
                                 <state key="normal" image="us"/>
@@ -47,9 +52,12 @@
                         <constraints>
                             <constraint firstItem="rUt-hI-s8v" firstAttribute="top" secondItem="HVo-tO-yvt" secondAttribute="bottom" constant="50" id="1sf-FK-JuE"/>
                             <constraint firstItem="ep2-t3-CYF" firstAttribute="top" secondItem="rUt-hI-s8v" secondAttribute="bottom" constant="50" id="GSN-di-Jbb"/>
+                            <constraint firstItem="rUt-hI-s8v" firstAttribute="height" secondItem="HVo-tO-yvt" secondAttribute="height" id="VIq-ku-zvY"/>
                             <constraint firstItem="rUt-hI-s8v" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ktZ-VM-IGc"/>
                             <constraint firstItem="rUt-hI-s8v" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="ktc-2o-7PC"/>
+                            <constraint firstItem="ep2-t3-CYF" firstAttribute="height" secondItem="rUt-hI-s8v" secondAttribute="height" id="l1C-su-ygC"/>
                             <constraint firstItem="ep2-t3-CYF" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="oqk-AW-2Do"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ep2-t3-CYF" secondAttribute="bottom" constant="20" id="umH-OO-HGi"/>
                             <constraint firstItem="HVo-tO-yvt" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="vtl-oo-kbA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
