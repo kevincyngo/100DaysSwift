@@ -11,10 +11,28 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
+    //our storyboard automatically creates a window in which all our VCs are shown
+    
+    //In the Single View App template, the root view controller is the ViewController,
+    //but we embedded ours inside a navigation controller, then embedded that inside a tab bar controller.
+    //So, for us the root view controller is a UITabBarController.
+    
+    var window: UIWindow?
+    
+    //gets called by iOS when the app has finished loading and is ready to be used
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        if let tabBarController = window?.rootViewController as? UITabBarController {
+            //Need to create a new VC by hand, which means we need to get reference to Main.storyboard
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let vc = storyboard.instantiateViewController(withIdentifier: "NavController")
+            vc.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 1)
+            //add the new VC to our tab bar controller's viewControllers array, which will cause it to appear in the tab vbar
+            tabBarController.viewControllers?.append(vc)
+        }
+        
         return true
     }
 
