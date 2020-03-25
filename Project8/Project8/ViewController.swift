@@ -39,6 +39,7 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         
         scoreLabel = UILabel()
+        //determines if views autoresizing mask is translated into auto layout constraints
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
         scoreLabel.textAlignment = .right
         scoreLabel.text = "Score: 0"
