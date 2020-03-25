@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     var activatedButtons = [UIButton]()
     var solutions = [String]()
 
+    var completedWords = 0
+    
     var score = 0 {
         didSet {
             scoreLabel.text = "Score: \(score)"
@@ -148,6 +150,12 @@ class ViewController: UIViewController {
                 let frame = CGRect(x: col * width, y: row * height, width: width, height: height)
                 letterButton.frame = frame
                 letterButton.addTarget(self, action: #selector(letterTapped), for: .touchUpInside)
+                
+                // Challenge 1
+                letterButton.layer.cornerRadius = 5
+                letterButton.layer.borderWidth = 1
+                letterButton.layer.borderColor = UIColor.black.cgColor
+                
                 // add it to the buttons view
                 buttonsView.addSubview(letterButton)
 
@@ -168,6 +176,7 @@ class ViewController: UIViewController {
         sender.isHidden = true
     }
 
+    
     @objc func submitTapped(_ sender: UIButton) {
         guard let answerText = currentAnswer.text else { return }
 
@@ -180,12 +189,26 @@ class ViewController: UIViewController {
 
             currentAnswer.text = ""
             score += 1
-
-            if score % 7 == 0 {
+            completedWords += 1
+            //Challenge 3 (changed score to completedWords)
+            if completedWords % 7 == 0 {
                 let ac = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
                 present(ac, animated: true)
+                completedWords = 0
             }
+        // Challenge 2
+        } else {
+            let ac = UIAlertController(title: "Wrong Answer", message: "Your answer is incorrect.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(ac, animated: true)
+            
+            for btn in activatedButtons {
+                btn.isHidden = false
+            }
+            activatedButtons.removeAll()
+            currentAnswer.text = ""
+            score -= 1
         }
     }
 
