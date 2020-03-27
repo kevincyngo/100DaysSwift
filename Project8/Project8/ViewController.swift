@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     var cluesLabel: UILabel!
     var answersLabel: UILabel!
     var currentAnswer: UITextField!
@@ -274,4 +274,5 @@ class ViewController: UIViewController {
     
     
 }
+
 
