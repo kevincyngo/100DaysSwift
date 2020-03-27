@@ -10,7 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
     let LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    let WORD_BANK = ["DOUCHE", "TWITTER", "ANAGRAM", "GNARLY", "FANTASTIC"]
+    let WORD_BANK = ["DOUCHE", "TWITTER", "ANAGRAM", "GNARLY", "FANTASTIC",
+                     "MAGICAL", "ADDRESSES", "ELECTRONICS", "SEARCHING",
+                     "INCREDIBLE", "MEMORY", "CONTROLLER"]
     
     var selectedLetter = ""
     var actualAnswerString = ""
@@ -125,9 +127,27 @@ class ViewController: UIViewController {
     }
     
     func loadLevel() {
+        resetBackground()
+        guessesRemaining = 5
         actualAnswerString = WORD_BANK.randomElement()!
         currentAnswerString = String.init(repeating: "?", count: actualAnswerString.count)
     }
+    
+    func reset(action: UIAlertAction) {
+        
+        loadLevel()
+    }
+    
+    func resetBackground() {
+        for view in buttonsView.subviews {
+            if view.backgroundColor == .yellow || view.isHidden {
+                view.backgroundColor = .white
+                view.isHidden = false
+                
+            }
+        }
+    }
+    
     
     func clearBackground(isSubmit: Bool = false) {
         for view in buttonsView.subviews {
@@ -157,8 +177,24 @@ class ViewController: UIViewController {
             }
         }
         selectedLetter = ""
+        
+        if currentAnswerString == actualAnswerString {
+            let ac = UIAlertController(title: "You win", message: "You found the word!", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "New word", style: .default, handler: reset))
+            present(ac, animated: true)
+        }
+        
         if !isCorrectLetter {
             guessesRemaining -= 1
+        }
+        
+        if guessesRemaining == 0 {
+            //alert
+            let ac = UIAlertController(title: "You lost", message: "The word was \(actualAnswerString).", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "New word", style: .default, handler: reset))
+            present(ac, animated: true)
+            //call load level
+            
         }
 
     }
