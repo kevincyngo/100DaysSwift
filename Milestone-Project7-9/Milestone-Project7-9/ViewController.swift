@@ -10,9 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     let LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    let WORD_BANK = ["DOUCHE", "TWITTER", "ANAGRAM", "GNARLY", "FANTASTIC",
-                     "MAGICAL", "ADDRESSES", "ELECTRONICS", "SEARCHING",
-                     "INCREDIBLE", "MEMORY", "CONTROLLER"]
+    var allWords = [String]()
+
     
     var selectedLetter = ""
     var actualAnswerString = ""
@@ -22,7 +21,7 @@ class ViewController: UIViewController {
         }
     }
     
-    var guessesRemaining = 5 {
+    var guessesRemaining = 7 {
         didSet {
             guessLabel.text = "You have \(guessesRemaining) guesses left."
         }
@@ -123,13 +122,25 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
+            //If file found, try to get words
+            if let startWords = try? String(contentsOf: startWordsURL) {
+                allWords = startWords.components(separatedBy: "\n")
+            }
+        }
+        //If no words, use default word of silkworm
+        if allWords.isEmpty {
+            allWords = ["silkworm"]
+        }
+        
         loadLevel()
     }
     
     func loadLevel() {
         resetBackground()
-        guessesRemaining = 5
-        actualAnswerString = WORD_BANK.randomElement()!
+        guessesRemaining = 7
+        actualAnswerString = allWords.randomElement()!.uppercased()
         currentAnswerString = String.init(repeating: "?", count: actualAnswerString.count)
     }
     
