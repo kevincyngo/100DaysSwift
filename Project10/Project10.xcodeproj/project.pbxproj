@@ -14,6 +14,7 @@
 		F050E1AA242E7A54004D12C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F050E1A9242E7A54004D12C4 /* Assets.xcassets */; };
 		F050E1AD242E7A54004D12C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F050E1AB242E7A54004D12C4 /* LaunchScreen.storyboard */; };
 		F050E1B5242E7C71004D12C4 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F050E1B4242E7C71004D12C4 /* PersonCell.swift */; };
+		F050E1B7242F9EA2004D12C4 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = F050E1B6242F9EA2004D12C4 /* Person.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		F050E1AC242E7A54004D12C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F050E1AE242E7A54004D12C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F050E1B4242E7C71004D12C4 /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
+		F050E1B6242F9EA2004D12C4 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				F050E1A0242E7A51004D12C4 /* AppDelegate.swift */,
 				F050E1A2242E7A51004D12C4 /* SceneDelegate.swift */,
 				F050E1A4242E7A51004D12C4 /* ViewController.swift */,
+				F050E1B6242F9EA2004D12C4 /* Person.swift */,
 				F050E1A6242E7A51004D12C4 /* Main.storyboard */,
 				F050E1A9242E7A54004D12C4 /* Assets.xcassets */,
 				F050E1AB242E7A54004D12C4 /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F050E1B7242F9EA2004D12C4 /* Person.swift in Sources */,
 				F050E1A5242E7A51004D12C4 /* ViewController.swift in Sources */,
 				F050E1A1242E7A51004D12C4 /* AppDelegate.swift in Sources */,
 				F050E1B5242E7C71004D12C4 /* PersonCell.swift in Sources */,
