@@ -13,6 +13,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var scoreLabel: SKLabelNode!
     
+    let BALL_COLORS = ["ballBlue", "ballYellow", "ballPurple", "ballGrey", "ballRed", "ballCyan", "ballGreen"]
+    let MAX_BALLS = 5
+    
     var score = 0 {
         didSet {
             scoreLabel.text = "Score: \(score)"
@@ -20,6 +23,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     var editLabel: SKLabelNode!
+    
+    var numBalls = 0
     
     var editingMode: Bool = false {
         didSet {
@@ -108,18 +113,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func collisionBetween(ball: SKNode, object: SKNode) {
         if object.name == "good" {
-            destroy(ball: ball)
+            destroy(object: ball)
             score += 1
         } else if object.name == "bad" {
-            destroy(ball: ball)
+            destroy(object: ball)
             score -= 1
+        //CHALLENGE 3
+        } else if object.name == "box" {
+            destroy(object: object)
         }
     }
 
-    func destroy(ball: SKNode) {
-        ball.removeFromParent()
+    func destroy(object: SKNode) {
+        if object.name == "ball" {
+            if let fireParticles = SKEmitterNode(fileNamed: "FireParticles") {
+                fireParticles.position = object.position
+                addChild(fireParticles)
+            }
+            numBalls -= 1
+        }
+        
+        object.removeFromParent()
     }
     
+    //called when two bodies contact eachother
     func didBegin(_ contact: SKPhysicsContact) {
         //use guard to check that both bodyA and bodyB have nodes attached
         guard let nodeA = contact.bodyA.node else { return }
@@ -138,7 +155,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let touch = touches.first {
             let location = touch.location(in: self)
             let objects = nodes(at: location)
-
+            
             if objects.contains(editLabel) {
                 editingMode.toggle()
             } else {
@@ -148,25 +165,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     let box = SKSpriteNode(color: UIColor(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1), size: size)
                     box.zRotation = CGFloat.random(in: 0...3)
                     box.position = location
-                    
+                    box.name = "box"
                     box.physicsBody = SKPhysicsBody(rectangleOf: box.size)
                     box.physicsBody?.isDynamic = false
                     addChild(box)
                     
                 } else {
-                    // create a ball
-                    let ball = SKSpriteNode(imageNamed: "ballRed")
-                    ball.name = "ball"
-                    ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2.0)
-                    
-                    //collisionBitMask -> which nodes should I bump into? (by default it's set to everything)
-                    //contactTestBitMask -> which collisions do you want to know about? (by default it's set to nothing)
-                    ball.physicsBody!.contactTestBitMask = ball.physicsBody!.collisionBitMask
-                    
-                    //restitution = bounciness (range is 0 to 1)
-                    ball.physicsBody?.restitution = 0.4
-                    ball.position = location
-                    addChild(ball)
+                    //CHALLENGE 2 (only create balls if clicked at upper 40% of screen)
+                    if location.y >= UIScreen.main.bounds.height*0.6 && numBalls < 5 {
+                        // create a ball (CHALLENGE 1)
+                        let ball = SKSpriteNode(imageNamed: BALL_COLORS[Int.random(in:0..<BALL_COLORS.count)])
+                        ball.name = "ball"
+                        ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2.0)
+                        
+                        //collisionBitMask -> which nodes should I bump into? (by default it's set to everything)
+                        //contactTestBitMask -> which collisions do you want to know about? (by default it's set to nothing)
+                        ball.physicsBody!.contactTestBitMask = ball.physicsBody!.collisionBitMask
+                        
+                        //restitution = bounciness (range is 0 to 1)
+                        ball.physicsBody?.restitution = 0.4
+                        ball.position = location
+                        
+                        numBalls += 1
+                        print(numBalls)
+                        
+                        addChild(ball)
+                    }
                 }
                 
                 
