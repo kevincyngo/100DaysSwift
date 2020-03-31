@@ -21,10 +21,22 @@ UINavigationControllerDelegate {
         let defaults = UserDefaults.standard
 
         if let savedPeople = defaults.object(forKey: "people") as? Data {
-            if let decodedPeople = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedPeople) as? [Person] {
-                people = decodedPeople
+            let jsonDecoder = JSONDecoder()
+
+            do {
+                people = try jsonDecoder.decode([Person].self, from: savedPeople)
+            } catch {
+                print("Failed to load people")
             }
         }
+        
+//        let defaults = UserDefaults.standard
+//
+//        if let savedPeople = defaults.object(forKey: "people") as? Data {
+//            if let decodedPeople = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedPeople) as? [Person] {
+//                people = decodedPeople
+//            }
+//        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -52,12 +64,22 @@ UINavigationControllerDelegate {
     }
     
     func save() {
-        //converts array to data object
-        if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: people, requiringSecureCoding: false) {
+        let jsonEncoder = JSONEncoder()
+        if let savedData = try? jsonEncoder.encode(people) {
             let defaults = UserDefaults.standard
             defaults.set(savedData, forKey: "people")
+        } else {
+            print("Failed to save people.")
         }
     }
+    
+//    func save() {
+//        //converts array to data object
+//        if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: people, requiringSecureCoding: false) {
+//            let defaults = UserDefaults.standard
+//            defaults.set(savedData, forKey: "people")
+//        }
+//    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }

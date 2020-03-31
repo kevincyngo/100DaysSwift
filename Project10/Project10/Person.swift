@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
-class Person: NSObject, NSCoding {
+class Person: NSObject, Codable {
+//class Person: NSObject, NSCoding {
     var name: String
     var image: String
     
@@ -17,17 +17,20 @@ class Person: NSObject, NSCoding {
         self.image = image
     }
     
+    
+    
+    
     //required keyword. This means "if anyone tries to subclass this class, they are required to implement this method."
     //we could also use final class
-    required init(coder aDecoder: NSCoder) {
-        name = aDecoder.decodeObject(forKey: "name") as? String ?? ""
-        image = aDecoder.decodeObject(forKey: "image") as? String ?? ""
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(name, forKey: "name")
-        aCoder.encode(image, forKey: "image")
-    }
+//    required init(coder aDecoder: NSCoder) {
+//        name = aDecoder.decodeObject(forKey: "name") as? String ?? ""
+//        image = aDecoder.decodeObject(forKey: "image") as? String ?? ""
+//    }
+//
+//    func encode(with aCoder: NSCoder) {
+//        aCoder.encode(name, forKey: "name")
+//        aCoder.encode(image, forKey: "image")
+//    }
 
 }
 
