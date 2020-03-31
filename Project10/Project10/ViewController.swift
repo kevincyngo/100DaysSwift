@@ -17,6 +17,14 @@ UINavigationControllerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewPerson))
+        
+        let defaults = UserDefaults.standard
+
+        if let savedPeople = defaults.object(forKey: "people") as? Data {
+            if let decodedPeople = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedPeople) as? [Person] {
+                people = decodedPeople
+            }
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -43,6 +51,14 @@ UINavigationControllerDelegate {
         return cell
     }
     
+    func save() {
+        //converts array to data object
+        if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: people, requiringSecureCoding: false) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "people")
+        }
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
 
@@ -56,7 +72,7 @@ UINavigationControllerDelegate {
         let person = Person(name: "Unknown", image: imageName)
         people.append(person)
         collectionView.reloadData()
-        
+        self.save()
         dismiss(animated: true)
     }
 
@@ -69,7 +85,6 @@ UINavigationControllerDelegate {
             [weak self] _ in
             self!.people.remove(at: indexPath.item)
             self?.collectionView.reloadData()
-            
         })
         
         promptAC.addAction(UIAlertAction(title: "Rename", style: .default){
@@ -84,6 +99,7 @@ UINavigationControllerDelegate {
             })
             self!.present(ac, animated: true)
         })
+        self.save()
         present(promptAC, animated: true)
     }
     
