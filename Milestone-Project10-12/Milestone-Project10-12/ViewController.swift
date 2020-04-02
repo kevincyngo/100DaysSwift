@@ -19,6 +19,18 @@ UINavigationControllerDelegate {
         title = "Photo Store"
         //Navigation Bar Item with (+) to access the camera
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(accessCamera))
+        
+        let defaults = UserDefaults.standard
+        
+        if let savedPhotos = defaults.object(forKey: "photos") as? Data {
+            let jsonDecoder = JSONDecoder()
+            
+            do {
+                photos = try jsonDecoder.decode([Photo].self, from: savedPhotos)
+            } catch {
+                print("Failed to load photos")
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,6 +58,16 @@ UINavigationControllerDelegate {
         return cell
     }
     
+    func save() {
+        let jsonEncoder = JSONEncoder()
+        if let savedData = try? jsonEncoder.encode(photos) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "photos")
+        } else {
+            print("Failed to save photos.")
+        }
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
 
@@ -63,6 +85,7 @@ UINavigationControllerDelegate {
             let photo = Photo(caption: caption, photo: imageName)
             self.photos.append(photo)
             self.tableView.reloadData()
+            self.save()
         })
         
 //        let photo = Photo(caption: "Unknown", photo: imageName)
@@ -71,7 +94,7 @@ UINavigationControllerDelegate {
 //        self.save()
         dismiss(animated: true)
         self.present(ac, animated: true)
-
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
