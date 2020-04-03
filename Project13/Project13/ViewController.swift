@@ -10,7 +10,14 @@ import UIKit
 import CoreImage
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var intensity: UISlider!
+    @IBOutlet weak var radius: UISlider!
+    @IBOutlet weak var scale: UISlider!
+    
     @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var filterLabel: UILabel!
+    
+    @IBOutlet weak var filterButton: UIButton!
     
     var currentImage: UIImage!
     var context: CIContext!
@@ -25,6 +32,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         context = CIContext()
         currentFilter = CIFilter(name: "CISepiaTone")
+        filterButton.setTitle("CISepiaTone", for: .normal)
+        intensity.isEnabled = false
+        radius.isEnabled = false
+        scale.isEnabled = false
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -33,7 +44,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true)
         
         currentImage = image
-        
+        intensity.isEnabled = true
+        radius.isEnabled = true
+        scale.isEnabled = true
         let beginImage = CIImage(image: currentImage)
         currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
         
@@ -41,16 +54,34 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func save(_ sender: Any) {
-        guard let image = imageView.image else { return }
-
+        if currentImage == nil {
+            print("Error no image")
+            return
+        }
+        
+        guard let image = imageView.image else {
+            return
+        }
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        
+        
+        
     }
     
     @IBAction func intensityChanged(_ sender: Any) {
         applyProcessing()
     }
     
+    @IBAction func scaleChanged(_ sender: Any) {
+        applyProcessing()
+    }
+
+    @IBAction func radiusChanged(_ sender: Any) {
+        applyProcessing()
+    }
+    
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        //if error isn't nil then we will go in here
         if let error = error {
             // we got back an error!
             let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
@@ -66,10 +97,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func applyProcessing() {
         let inputKeys = currentFilter.inputKeys
         
-        if inputKeys.contains(kCIInputIntensityKey) { currentFilter.setValue(intensity.value, forKey: kCIInputIntensityKey) }
-        if inputKeys.contains(kCIInputRadiusKey) { currentFilter.setValue(intensity.value * 200, forKey: kCIInputRadiusKey) }
-        if inputKeys.contains(kCIInputScaleKey) { currentFilter.setValue(intensity.value * 10, forKey: kCIInputScaleKey) }
-        if inputKeys.contains(kCIInputCenterKey) { currentFilter.setValue(CIVector(x: currentImage.size.width / 2, y: currentImage.size.height / 2), forKey: kCIInputCenterKey) }
+        if inputKeys.contains(kCIInputIntensityKey) {
+            currentFilter.setValue(intensity.value, forKey: kCIInputIntensityKey)
+        }
+        if inputKeys.contains(kCIInputRadiusKey) {
+            currentFilter.setValue(radius.value * 200, forKey: kCIInputRadiusKey)
+        }
+        if inputKeys.contains(kCIInputScaleKey) {
+            currentFilter.setValue(scale.value * 10, forKey: kCIInputScaleKey)
+        }
+        if inputKeys.contains(kCIInputCenterKey) {
+            currentFilter.setValue(CIVector(x: currentImage.size.width / 2, y: currentImage.size.height / 2), forKey: kCIInputCenterKey)
+        }
         
         if let cgimg = context.createCGImage(currentFilter.outputImage!, from: currentFilter.outputImage!.extent) {
             let processedImage = UIImage(cgImage: cgimg)
@@ -97,8 +136,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // safely read the alert action's title
         guard let actionTitle = action.title else { return }
         
+        filterButton.setTitle(actionTitle, for: .normal)
         currentFilter = CIFilter(name: actionTitle)
-        
         let beginImage = CIImage(image: currentImage)
         currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
         
