@@ -22,6 +22,8 @@ class GameScene: SKScene {
     
     var slots = [WhackSlot]()
     
+    var finalScore: SKLabelNode!
+    
     //limited to 30 roudns of enemies, each round is one call to createEnemy()
     var numRounds = 0
     
@@ -33,7 +35,7 @@ class GameScene: SKScene {
         addChild(background)
         
         gameScore = SKLabelNode(fontNamed: "Chalkduster")
-        gameScore.text = "Score: 0"
+        gameScore.text = "Score 0"
         gameScore.position = CGPoint(x: 8, y: 8)
         gameScore.horizontalAlignmentMode = .left
         gameScore.fontSize = 48
@@ -64,6 +66,7 @@ class GameScene: SKScene {
                 score -= 5
                 
                 run(SKAction.playSoundFileNamed("whackBad.caf", waitForCompletion: false))
+                smokeEffect(whackSlot)
             } else if node.name == "charEnemy" {
                 //should have whacked this one
                 whackSlot.charNode.xScale = 0.85
@@ -71,9 +74,18 @@ class GameScene: SKScene {
                 score += 1
                 
                 run(SKAction.playSoundFileNamed("whack.caf", waitForCompletion: false))
-                
+                smokeEffect(whackSlot)
             }
         }
+    }
+    
+    func smokeEffect(_ whackSlot: WhackSlot) {
+        if let particles = SKEmitterNode(fileNamed: "smokeParticle.sks") {
+            
+            particles.position = whackSlot.position
+            addChild(particles)
+        }
+        
     }
     
     func createSlot(at position: CGPoint) {
@@ -95,6 +107,15 @@ class GameScene: SKScene {
             gameOver.position = CGPoint(x: 512, y: 384)
             gameOver.zPosition = 1
             addChild(gameOver)
+            
+            finalScore = SKLabelNode(fontNamed: "Chalkduster")
+            finalScore.text = "Final " + gameScore.text!
+            finalScore.position = CGPoint(x: 512, y: 304)
+//            finalScore.horizontalAlignmentMode = .left
+            finalScore.zPosition = 1
+            finalScore.fontSize = 48
+            gameScore.text = ""
+            addChild(finalScore)
             
             return
         }

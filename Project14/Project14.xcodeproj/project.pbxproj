@@ -23,6 +23,7 @@
 		F050E2A0243A7153004D12C4 /* whackMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F050E298243A7153004D12C4 /* whackMask@2x.png */; };
 		F050E2A1243A7153004D12C4 /* whackBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F050E299243A7153004D12C4 /* whackBackground@2x.png */; };
 		F050E2A3243A7DE2004D12C4 /* WhackSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F050E2A2243A7DE2004D12C4 /* WhackSlot.swift */; };
+		F050E2AD243C2879004D12C4 /* smokeParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = F050E2AC243C2879004D12C4 /* smokeParticle.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		F050E298243A7153004D12C4 /* whackMask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whackMask@2x.png"; sourceTree = "<group>"; };
 		F050E299243A7153004D12C4 /* whackBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whackBackground@2x.png"; sourceTree = "<group>"; };
 		F050E2A2243A7DE2004D12C4 /* WhackSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhackSlot.swift; sourceTree = "<group>"; };
+		F050E2AB243C2865004D12C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F050E2AC243C2879004D12C4 /* smokeParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = smokeParticle.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,8 @@
 		F050E291243A7153004D12C4 /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				F050E2AB243C2865004D12C4 /* Assets.xcassets */,
+				F050E2AC243C2879004D12C4 /* smokeParticle.sks */,
 				F050E292243A7153004D12C4 /* whackBad.caf */,
 				F050E293243A7153004D12C4 /* whack.caf */,
 				F050E294243A7153004D12C4 /* gameOver@2x.png */,
@@ -171,6 +176,7 @@
 				F050E287243A7103004D12C4 /* Assets.xcassets in Resources */,
 				F050E2A1243A7153004D12C4 /* whackBackground@2x.png in Resources */,
 				F050E29E243A7153004D12C4 /* whackHole@2x.png in Resources */,
+				F050E2AD243C2879004D12C4 /* smokeParticle.sks in Resources */,
 				F050E28A243A7103004D12C4 /* LaunchScreen.storyboard in Resources */,
 				F050E29D243A7153004D12C4 /* penguinEvil@2x.png in Resources */,
 				F050E29C243A7153004D12C4 /* gameOver@2x.png in Resources */,
