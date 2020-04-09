@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+struct Country: Codable {
+    var country: String
+    var capital: String
+    var population: Int
+    var currency: String
+    var facts: [String]
+}

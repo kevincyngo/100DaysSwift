@@ -14,13 +14,16 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var capitalCityLabel: UILabel!
     @IBOutlet weak var populationLabel: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
+    
+    var country: Country!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleLabel.text = "Canada"
-        capitalCityLabel.text = "Capital City: Ottawa"
-        populationLabel.text = "Population: 40,000,000"
-        currencyLabel.text = "Currency: Canadian Dollar"
+        titleLabel.text = country.country
+        capitalCityLabel.text = "Capital City: " + country.capital
+        populationLabel.text = "Population: \(country.population)"
+        currencyLabel.text = "Currency: " + country.currency
         // Do any additional setup after loading the view.
     }
     

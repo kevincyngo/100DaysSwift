@@ -9,18 +9,39 @@
 import UIKit
 
 class ViewController: UITableViewController {
-
-    var countries = [String]()
+    
+    var countries = [Country]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         title = "Country Factoids"
-        countries.append("Canada")
-        countries.append("United States")
-        countries.append("England")
+        parse()
     }
-
+    
+    
+    func parse(){
+        if let path = Bundle.main.path(forResource: "CountryInformation", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let decoder = JSONDecoder()
+                do {
+                    // get the data from JSON file with help of struct and Codable
+                    let countryModel = try decoder.decode(Countries.self, from: data)
+                    // from here you can populate data in tableview
+                    countries = countryModel.results
+                    tableView.reloadData()
+                }catch{
+                    print(error) // shows error
+                    print("Decoding failed")// local message
+                }
+                
+            } catch {
+                print(error) // shows error
+                print("Unable to read file")// local message
+            }
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return countries.count
     }
@@ -28,7 +49,7 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //Insert row
         let cell = tableView.dequeueReusableCell(withIdentifier: "Country", for: indexPath)
-        cell.textLabel?.text = countries[indexPath.row]
+        cell.textLabel?.text = countries[indexPath.row].country
         return cell
     }
     
@@ -36,13 +57,11 @@ class ViewController: UITableViewController {
         // 1: try loading the "Detail" view controller and typecasting it to be DetailViewController
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailsViewController {
             // 2: success! Set its selectedImage property
-//            vc.selectedImage = pictures[indexPath.row]
-//            vc.currentImagesNum = indexPath.row + 1
-//            vc.totalImagesNum = pictures.count
+            vc.country = countries[indexPath.row]
             // 3: now push it onto the navigation controller
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-
+    
 }
 

@@ -16,6 +16,7 @@
 		F050E2F6243E649B004D12C4 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F050E2F5243E649B004D12C4 /* DetailsViewController.swift */; };
 		F050E2F8243E6C7D004D12C4 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = F050E2F7243E6C7D004D12C4 /* Country.swift */; };
 		F050E2FA243E6C87004D12C4 /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = F050E2F9243E6C87004D12C4 /* Countries.swift */; };
+		F050E2FC243F7E09004D12C4 /* CountryInformation.json in Resources */ = {isa = PBXBuildFile; fileRef = F050E2FB243F7E09004D12C4 /* CountryInformation.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		F050E2F5243E649B004D12C4 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		F050E2F7243E6C7D004D12C4 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		F050E2F9243E6C87004D12C4 /* Countries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countries.swift; sourceTree = "<group>"; };
+		F050E2FB243F7E09004D12C4 /* CountryInformation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = CountryInformation.json; path = ../../../../../Desktop/CountryInformation.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				F050E2E3243E53FC004D12C4 /* ViewController.swift */,
 				F050E2E5243E53FC004D12C4 /* Main.storyboard */,
 				F050E2E8243E53FF004D12C4 /* Assets.xcassets */,
+				F050E2FB243F7E09004D12C4 /* CountryInformation.json */,
 				F050E2EA243E53FF004D12C4 /* LaunchScreen.storyboard */,
 				F050E2ED243E53FF004D12C4 /* Info.plist */,
 			);
@@ -135,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F050E2EC243E53FF004D12C4 /* LaunchScreen.storyboard in Resources */,
+				F050E2FC243F7E09004D12C4 /* CountryInformation.json in Resources */,
 				F050E2E9243E53FF004D12C4 /* Assets.xcassets in Resources */,
 				F050E2E7243E53FC004D12C4 /* Main.storyboard in Resources */,
 			);
