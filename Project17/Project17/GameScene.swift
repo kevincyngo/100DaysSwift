@@ -25,6 +25,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isGameOver = false
     var gameTimer: Timer?
 
+    var numEnemiesSpawned = 0
+    var spawnTimer = 1.0
     
     override func didMove(to view: SKView) {
         backgroundColor = .black
@@ -51,7 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = self
         
-        gameTimer = Timer.scheduledTimer(timeInterval: 0.35, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: spawnTimer, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
     }
     
     @objc func createEnemy() {
@@ -67,6 +69,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sprite.physicsBody?.angularVelocity = 5
         sprite.physicsBody?.linearDamping = 0
         sprite.physicsBody?.angularDamping = 0
+        
+        //Challenge 2
+        numEnemiesSpawned += 1
+        if numEnemiesSpawned % 20 == 0 {
+            spawnTimer -= 0.1
+            gameTimer?.invalidate()
+            gameTimer = Timer.scheduledTimer(timeInterval: spawnTimer, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -103,5 +113,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.removeFromParent()
 
         isGameOver = true
+        
+        //Challenge 3
+        gameTimer?.invalidate()
+    }
+    
+    //Challenge 1
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for node in children {
+            if node == player {
+                let explosion = SKEmitterNode(fileNamed: "explosion")!
+                explosion.position = player.position
+                addChild(explosion)
+                
+                player.removeFromParent()
+
+                isGameOver = true
+                
+                //Challenge 3
+                gameTimer?.invalidate()
+                
+                return
+            }
+        }
     }
 }
