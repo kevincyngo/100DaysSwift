@@ -14,6 +14,7 @@
 		F050E31324403520004D12C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F050E31224403520004D12C4 /* Assets.xcassets */; };
 		F050E31624403520004D12C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F050E31424403520004D12C4 /* LaunchScreen.storyboard */; };
 		F050E31E24403884004D12C4 /* Capital.swift in Sources */ = {isa = PBXBuildFile; fileRef = F050E31D24403884004D12C4 /* Capital.swift */; };
+		F050E32024404083004D12C4 /* WikiWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F050E31F24404083004D12C4 /* WikiWebController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		F050E31524403520004D12C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F050E31724403520004D12C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F050E31D24403884004D12C4 /* Capital.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capital.swift; sourceTree = "<group>"; };
+		F050E31F24404083004D12C4 /* WikiWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiWebController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				F050E3092440351D004D12C4 /* AppDelegate.swift */,
 				F050E30B2440351D004D12C4 /* SceneDelegate.swift */,
 				F050E30D2440351D004D12C4 /* ViewController.swift */,
+				F050E31F24404083004D12C4 /* WikiWebController.swift */,
 				F050E31D24403884004D12C4 /* Capital.swift */,
 				F050E30F2440351D004D12C4 /* Main.storyboard */,
 				F050E31224403520004D12C4 /* Assets.xcassets */,
@@ -144,6 +147,7 @@
 				F050E30E2440351D004D12C4 /* ViewController.swift in Sources */,
 				F050E30A2440351D004D12C4 /* AppDelegate.swift in Sources */,
 				F050E31E24403884004D12C4 /* Capital.swift in Sources */,
+				F050E32024404083004D12C4 /* WikiWebController.swift in Sources */,
 				F050E30C2440351D004D12C4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
