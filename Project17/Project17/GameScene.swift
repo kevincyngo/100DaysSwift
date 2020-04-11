@@ -118,7 +118,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameTimer?.invalidate()
     }
     
-    //Challenge 1
+    //Challenge 1 (called when user lifts finger and the touch ends)
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for node in children {
             if node == player {
