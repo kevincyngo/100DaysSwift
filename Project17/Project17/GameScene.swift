@@ -84,7 +84,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if node.position.x < -300 {
                 node.removeFromParent()
             }
-            
         }
 
         if !isGameOver {
