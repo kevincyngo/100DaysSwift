@@ -18,6 +18,8 @@
 		F050E4B4244762E8004D12C4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F050E4B2244762E8004D12C4 /* MainInterface.storyboard */; };
 		F050E4B8244762E8004D12C4 /* Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F050E4AC244762E8004D12C4 /* Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F050E4BE244796C4004D12C4 /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = F050E4BD244796C4004D12C4 /* Action.js */; };
+		F050E4C82448BA6F004D12C4 /* injection-presets.json in Resources */ = {isa = PBXBuildFile; fileRef = F050E4C72448BA6F004D12C4 /* injection-presets.json */; };
+		F050E4CA2448BC04004D12C4 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F050E4C92448BC04004D12C4 /* Injection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		F050E4B5244762E8004D12C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F050E4BD244796C4004D12C4 /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
 		F050E4BF24481D9F004D12C4 /* Project19.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Project19.entitlements; sourceTree = "<group>"; };
+		F050E4C72448BA6F004D12C4 /* injection-presets.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "injection-presets.json"; sourceTree = "<group>"; };
+		F050E4C92448BC04004D12C4 /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,8 @@
 				F050E4B2244762E8004D12C4 /* MainInterface.storyboard */,
 				F050E4B5244762E8004D12C4 /* Info.plist */,
 				F050E4BD244796C4004D12C4 /* Action.js */,
+				F050E4C72448BA6F004D12C4 /* injection-presets.json */,
+				F050E4C92448BC04004D12C4 /* Injection.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -216,6 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F050E4C82448BA6F004D12C4 /* injection-presets.json in Resources */,
 				F050E4BE244796C4004D12C4 /* Action.js in Resources */,
 				F050E4AF244762E8004D12C4 /* Media.xcassets in Resources */,
 				F050E4B4244762E8004D12C4 /* MainInterface.storyboard in Resources */,
@@ -240,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F050E4B1244762E8004D12C4 /* ActionViewController.swift in Sources */,
+				F050E4CA2448BC04004D12C4 /* Injection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
