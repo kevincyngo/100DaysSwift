@@ -19,6 +19,41 @@ class ActionViewController: UIViewController {
     
     var injectionPresets = [Injection]()
     
+    func loadPresets() {
+        //load from userdefaults
+        if let data = UserDefaults.standard.data(forKey: "SavedData") {
+            if let decoded = try? JSONDecoder().decode([Injection].self, from: data) {
+                print(decoded)
+                self.injectionPresets = decoded
+                return
+            }
+        }
+        
+        //if userdefault load fails, load from json presets
+        if let path = Bundle.main.path(forResource: "injection-presets", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let decoder = JSONDecoder()
+                do {
+                    // get the data from JSON file with help of struct and Codable
+                    self.injectionPresets = try decoder.decode([Injection].self, from: data)
+                    self.saveToUserDefault()
+                    return
+                }catch{
+                    print(error) // shows error
+                    print("Decoding failed")// local message
+                }
+            } catch {
+                print(error) // shows error
+                print("Unable to read file")// local message
+            }
+        }
+        
+        //if both userdefault and json fail, set to empty array
+        self.injectionPresets = []
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +61,7 @@ class ActionViewController: UIViewController {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(displayPresets))
         
+        loadPresets()
         
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -79,8 +115,12 @@ class ActionViewController: UIViewController {
     @IBAction func done(_ presetScript: String = "") {
         let item = NSExtensionItem()
         let argument: NSDictionary
+        
+        //add alert in here to save to userdefaults (alert with textfield)
         if presetScript == "" {
-             argument = ["customJavaScript": script.text!]
+            argument = ["customJavaScript": script.text!]
+            
+            //saveToUserDefault()
         } else {
             argument = ["customJavaScript": presetScript]
         }
@@ -89,39 +129,30 @@ class ActionViewController: UIViewController {
         item.attachments = [customJavaScript]
         
         extensionContext?.completeRequest(returningItems: [item])
+        
+    }
+    
+    func saveToUserDefault() {
+        if let encoded = try? JSONEncoder().encode(injectionPresets) {
+            UserDefaults.standard.set(encoded, forKey: "SavedData")
+        }
     }
     
     //challenge 1
     @IBAction func displayPresets() {
-        if let path = Bundle.main.path(forResource: "injection-presets", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let decoder = JSONDecoder()
-                do {
-                    // get the data from JSON file with help of struct and Codable
-                    injectionPresets = try decoder.decode([Injection].self, from: data)
-                    
-                    // show list of presets
-                    let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: .alert)
-                    
-                    for injection in injectionPresets {
-                        alert.addAction(UIAlertAction(title: injection.title, style: .default, handler: { action in
-                            self.done(injection.evalString)
-                        }))
-                    }
-                    
-                    self.present(alert, animated: true, completion: nil)
-                    
-                }catch{
-                    print(error) // shows error
-                    print("Decoding failed")// local message
-                }
-                
-            } catch {
-                print(error) // shows error
-                print("Unable to read file")// local message
-            }
+        let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: .alert)
+        
+        for (idx, injection) in injectionPresets.enumerated() {
+            alert.addAction(UIAlertAction(title: injection.title, style: .default, handler: { action in
+                self.injectionPresets[idx].siteURL = URL(string: self.pageURL)
+                self.saveToUserDefault()
+                self.done(injection.evalString)
+            }))
         }
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        
     }
     
 }

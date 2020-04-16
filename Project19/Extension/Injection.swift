@@ -11,16 +11,15 @@ import Foundation
 struct Injection: Codable {
     var title: String
     var evalString: String
-//    var siteURL: URL?
+    var siteURL: URL?
     
-    
-//    init(
-//        title: String,
-//        evalString: String,
-//        siteURL: URL? = nil
-//    ) {
-//        self.title = title
-//        self.evalString = evalString
-//        self.siteURL = siteURL
-//    }
+    init(
+        title: String,
+        evalString: String,
+        siteURL: URL? = nil
+    ) {
+        self.title = title
+        self.evalString = evalString
+        self.siteURL = siteURL
+    }
 }
