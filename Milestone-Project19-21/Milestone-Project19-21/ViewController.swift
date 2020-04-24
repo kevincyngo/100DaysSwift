@@ -9,43 +9,70 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
-    @IBAction func add(_ sender: Any) {
-        print("add new note")
-    }
+    var notes = [Note]()
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         title = "Notes"
-        tableView.contentInset = UIEdgeInsets(top: 3, left: 5, bottom: 3, right: 0)
         tableView.delegate = self
         tableView.dataSource = self
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        loadNotes()
+        
+        //        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         
     }
     
-    @objc func addTapped() {
-      print("add new note")
+    func loadNotes() {
+        if let savedNotes = UserDefaults.standard.object(forKey: "SavedNotes") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedNotes = try? decoder.decode([Note].self, from: savedNotes) {
+                notes = loadedNotes
+            }
+        }
     }
-
+    
+    
+    @IBAction func addNote(_ sender: Any) {
+//        notes.append(Note(title: "addTappedNode", date: Date(), description: "addTappedNode"))
+//        tableView.reloadData()
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+            notes.append(Note(title: "", date: Date(), description: ""))
+            vc.note = notes.last!
+            vc.notes = notes
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        notes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Note", for: indexPath) as! NoteTableViewCell
-        
-        cell.dateLabel.text = "2020-04-20"
-        cell.descriptionLabel.text = "Test Description Label"
-        cell.titleLabel.text = "Test Note"
+        let note = notes[indexPath.row]
+        cell.date.text = note.stringDate
+        cell.descriptionLabel.text = String(note.description.prefix(32))
+        cell.title.text = String(note.title.prefix(32))
         
         return cell
         
     }
-
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+            vc.note = notes[indexPath.row]
+            vc.notes = notes
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    
 }
 
