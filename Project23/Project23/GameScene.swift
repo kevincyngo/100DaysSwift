@@ -113,12 +113,15 @@ class GameScene: SKScene {
         let nodesAtPoint = nodes(at: location)
         
         for case let node as SKSpriteNode in nodesAtPoint {
-            if node.name == "enemy" {
+            if node.name == "enemy" || node.name == "enemyBonus" {
                 // Create particle effect over the pengiun
                 if let emitter = SKEmitterNode(fileNamed: "sliceHitEnemy") {
                     emitter.position = node.position
                     addChild(emitter)
                 }
+                
+                // Add to the score depending on the enemy name
+                (node.name == "enemyBonus" ? (score += 2) : (score += 1))
                 
                 // Clear its node name so it can be swiped repeatedly
                 node.name = ""
@@ -138,8 +141,7 @@ class GameScene: SKScene {
                 let seq = SKAction.sequence([group, .removeFromParent()])
                 node.run(seq)
                 
-                // Add to the score
-                score += 1
+                
                 
                 // Find and remove enemy from activeEnemies array
                 if let index = activeEnemies.firstIndex(of: node) {
@@ -291,6 +293,13 @@ class GameScene: SKScene {
                 emitter.position = CGPoint(x: 76, y: 64)
                 enemy.addChild(emitter)
             }
+        }
+        //Spawn bonus pengiun
+        else if enemyType == 6 || enemyType == 5 {
+                enemy = SKSpriteNode(imageNamed: "penguinBonus")
+                run(SKAction.playSoundFileNamed("launch.caf", waitForCompletion: false))
+                enemy.name = "enemyBonus"
+            
         } else {
             enemy = SKSpriteNode(imageNamed: "penguin")
             run(SKAction.playSoundFileNamed("launch.caf", waitForCompletion: false))
@@ -316,6 +325,8 @@ class GameScene: SKScene {
             randomXVelocity = -Int.random(in: 8...15)
         }
         
+        //Change velocity based on enemy // enemyBonus
+        
         // 4
         let randomYVelocity = Int.random(in: 24...32)
         
@@ -335,7 +346,8 @@ class GameScene: SKScene {
                 if node.position.y < -140 {
                     node.removeAllActions()
 
-                    if node.name == "enemy" {
+                    //If you miss striking a penguin you lose a life
+                    if node.name == "enemy" || node.name == "enemyBonus" {
                         node.name = ""
                         subtractLife()
 
@@ -459,7 +471,7 @@ class GameScene: SKScene {
         if isGameEnded {
             return
         }
-
+        
         isGameEnded = true
         physicsWorld.speed = 0
         isUserInteractionEnabled = false
@@ -472,6 +484,12 @@ class GameScene: SKScene {
             livesImages[1].texture = SKTexture(imageNamed: "sliceLifeGone")
             livesImages[2].texture = SKTexture(imageNamed: "sliceLifeGone")
         }
+        
+        let gameOverLabel = SKLabelNode(fontNamed: "Chalkduster")
+        gameOverLabel.fontSize = 64
+        gameOverLabel.position.x = self.size.width / 2
+        gameOverLabel.position.y = self.size.height / 2
+        gameOverLabel.text = "GAME OVER"
+        addChild(gameOverLabel)
     }
-    
 }

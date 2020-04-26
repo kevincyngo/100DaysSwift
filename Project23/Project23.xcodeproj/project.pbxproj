@@ -32,6 +32,7 @@
 		F0D70F192453737200DBBCBD /* swoosh3.caf in Resources */ = {isa = PBXBuildFile; fileRef = F0D70F082453737200DBBCBD /* swoosh3.caf */; };
 		F0D70F1A2453737200DBBCBD /* swoosh2.caf in Resources */ = {isa = PBXBuildFile; fileRef = F0D70F092453737200DBBCBD /* swoosh2.caf */; };
 		F0D70F1B2453737200DBBCBD /* swoosh1.caf in Resources */ = {isa = PBXBuildFile; fileRef = F0D70F0A2453737200DBBCBD /* swoosh1.caf */; };
+		F0D70F1D2456217200DBBCBD /* penguinBonus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0D70F1C2456217200DBBCBD /* penguinBonus@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		F0D70F082453737200DBBCBD /* swoosh3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = swoosh3.caf; sourceTree = "<group>"; };
 		F0D70F092453737200DBBCBD /* swoosh2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = swoosh2.caf; sourceTree = "<group>"; };
 		F0D70F0A2453737200DBBCBD /* swoosh1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = swoosh1.caf; sourceTree = "<group>"; };
+		F0D70F1C2456217200DBBCBD /* penguinBonus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "penguinBonus@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				F0D70F032453737200DBBCBD /* sliceBackground@2x.png */,
 				F0D70F042453737200DBBCBD /* sliceHitEnemy.sks */,
 				F0D70F052453737200DBBCBD /* sliceBombFuse.caf */,
+				F0D70F1C2456217200DBBCBD /* penguinBonus@2x.png */,
 				F0D70F062453737200DBBCBD /* sliceHitBomb.sks */,
 				F0D70F072453737200DBBCBD /* penguin@2x.png */,
 				F0D70F082453737200DBBCBD /* swoosh3.caf */,
@@ -197,6 +200,7 @@
 				F0D70F122453737200DBBCBD /* launch.caf in Resources */,
 				F0D70F152453737200DBBCBD /* sliceHitEnemy.sks in Resources */,
 				F0D70F0E2453737200DBBCBD /* sliceLifeGone@2x.png in Resources */,
+				F0D70F1D2456217200DBBCBD /* penguinBonus@2x.png in Resources */,
 				F0D70F182453737200DBBCBD /* penguin@2x.png in Resources */,
 				F0D70EE42453732300DBBCBD /* GameScene.sks in Resources */,
 				F0D70F192453737200DBBCBD /* swoosh3.caf in Resources */,
