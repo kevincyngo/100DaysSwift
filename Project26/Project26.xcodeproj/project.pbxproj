@@ -22,6 +22,8 @@
 		F0D70FB02459E03100DBBCBD /* block@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0D70FA92459E03000DBBCBD /* block@2x.png */; };
 		F0D70FB12459E03100DBBCBD /* vortex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0D70FAA2459E03000DBBCBD /* vortex@2x.png */; };
 		F0D70FB22459E03100DBBCBD /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0D70FAB2459E03000DBBCBD /* background@2x.jpg */; };
+		F0D70FB4245B2F9F00DBBCBD /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = F0D70FB3245B2F9F00DBBCBD /* level2.txt */; };
+		F0D70FB6245B2FAA00DBBCBD /* level3.txt in Resources */ = {isa = PBXBuildFile; fileRef = F0D70FB5245B2FAA00DBBCBD /* level3.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		F0D70FA92459E03000DBBCBD /* block@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "block@2x.png"; sourceTree = "<group>"; };
 		F0D70FAA2459E03000DBBCBD /* vortex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vortex@2x.png"; sourceTree = "<group>"; };
 		F0D70FAB2459E03000DBBCBD /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
+		F0D70FB3245B2F9F00DBBCBD /* level2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = level2.txt; path = ../../../../../../Downloads/level2.txt; sourceTree = "<group>"; };
+		F0D70FB5245B2FAA00DBBCBD /* level3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level3.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,8 @@
 			children = (
 				F0D70FA52459E03000DBBCBD /* finish@2x.png */,
 				F0D70FA62459E03000DBBCBD /* level1.txt */,
+				F0D70FB3245B2F9F00DBBCBD /* level2.txt */,
+				F0D70FB5245B2FAA00DBBCBD /* level3.txt */,
 				F0D70FA72459E03000DBBCBD /* star@2x.png */,
 				F0D70FA82459E03000DBBCBD /* player@2x.png */,
 				F0D70FA92459E03000DBBCBD /* block@2x.png */,
@@ -167,6 +173,8 @@
 				F0D70FAD2459E03100DBBCBD /* level1.txt in Resources */,
 				F0D70F9A2459C8CB00DBBCBD /* Assets.xcassets in Resources */,
 				F0D70FAC2459E03100DBBCBD /* finish@2x.png in Resources */,
+				F0D70FB6245B2FAA00DBBCBD /* level3.txt in Resources */,
+				F0D70FB4245B2F9F00DBBCBD /* level2.txt in Resources */,
 				F0D70FB02459E03100DBBCBD /* block@2x.png in Resources */,
 				F0D70F9D2459C8CB00DBBCBD /* LaunchScreen.storyboard in Resources */,
 				F0D70FAF2459E03100DBBCBD /* player@2x.png in Resources */,
