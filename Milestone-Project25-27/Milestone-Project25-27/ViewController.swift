@@ -8,7 +8,22 @@
 
 import UIKit
 
-class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+
+//MARK: Improvements: disable text buttons if image not imported, don't force unwrap
+
+class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActivityItemSource {
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return "activityViewControllerPlaceholderItem"
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        return "itemForActivityType"
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
+        return "Secret message"
+    }
+    
     
     @IBOutlet weak var imageView: UIImageView!
     
@@ -53,7 +68,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
     }
     
-    //MARK: - one call to textToImage(). textToImage() will draw the new image with top and bottom text
     //Add text to top of image
     @objc func addTopText() {
         let ac = UIAlertController(title: "Enter top text", message: nil, preferredStyle: .alert)
@@ -77,7 +91,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned ac] _ in
             self.botText = ac.textFields![0].text ?? ""
             //edit the bottom of the image
-            print((self.imageView.image?.size.height)!)
             self.imageView.image = self.textToImage()
             
         }
@@ -90,7 +103,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     //Share the image
     @objc func shareImage() {
-        print("WHAT?")
+        let item = [imageView.image]
+        let ac = UIActivityViewController(activityItems: item as [Any], applicationActivities: nil)
+        present(ac, animated: true)
     }
     
     
