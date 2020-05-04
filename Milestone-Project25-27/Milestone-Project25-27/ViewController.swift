@@ -9,7 +9,7 @@
 import UIKit
 
 
-//MARK: Improvements: disable text buttons if image not imported, don't force unwrap
+//MARK: Improvements: disable text buttons if image not imported, don't force unwrap, allow multiple lines of text
 
 class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActivityItemSource {
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
