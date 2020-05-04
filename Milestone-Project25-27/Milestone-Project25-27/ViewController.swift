@@ -46,14 +46,14 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
-
+        
         dismiss(animated: true)
         imageView.image = image
         originalImage = imageView.image
-
+        
     }
     
-    
+    //MARK: - one call to textToImage(). textToImage() will draw the new image with top and bottom text
     //Add text to top of image
     @objc func addTopText() {
         let ac = UIAlertController(title: "Enter top text", message: nil, preferredStyle: .alert)
@@ -61,8 +61,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned ac] _ in
             self.topText = ac.textFields![0].text ?? ""
             //edit the top of the image
-            self.imageView.image = self.textToImage(drawText: answer!, inImage: self.imageView.image!, atPoint: CGPoint(x: 20, y: 20))
-
+            self.imageView.image = self.textToImage()
         }
         
         ac.addAction(submitAction)
@@ -79,7 +78,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             self.botText = ac.textFields![0].text ?? ""
             //edit the bottom of the image
             print((self.imageView.image?.size.height)!)
-            self.imageView.image = self.textToImage(drawText: answer!, inImage: self.imageView.image!, atPoint: CGPoint(x: 20, y: (self.imageView.image?.size.height)! - 84))
+            self.imageView.image = self.textToImage()
             
         }
         
@@ -113,13 +112,13 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         imageView.image = img
     }
     
-    func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
+    func textToImage() -> UIImage {
         let textColor = UIColor.white
         let textFont = UIFont(name: "Helvetica Bold", size: 64)!
         let strokeColor = UIColor.black
         let scale = UIScreen.main.scale
-        UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
-
+        UIGraphicsBeginImageContextWithOptions(self.originalImage!.size, false, scale)
+        
         let textFontAttributes = [
             NSAttributedString.Key.font: textFont,
             NSAttributedString.Key.foregroundColor: textColor,
@@ -127,14 +126,17 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             NSAttributedString.Key.strokeColor: strokeColor
             ] as [NSAttributedString.Key : Any]
         
-        image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
-
-        let rect = CGRect(origin: point, size: image.size)
-        text.draw(in: rect, withAttributes: textFontAttributes)
-
+        self.originalImage!.draw(in: CGRect(origin: CGPoint.zero, size: self.originalImage!.size))
+        
+        let topRect = CGRect(origin: CGPoint(x: 20, y: 20), size: self.originalImage!.size)
+        self.topText.draw(in: topRect, withAttributes: textFontAttributes)
+        
+        let botRect = CGRect(origin: CGPoint(x: 20, y: (self.imageView.image?.size.height)! - 84), size: self.originalImage!.size)
+        self.botText.draw(in: botRect, withAttributes: textFontAttributes)
+        
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
+        
         return newImage!
     }
     
