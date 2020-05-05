@@ -21,6 +21,28 @@ class GameViewController: UIViewController {
     @IBOutlet weak var launchButton: UIButton!
     @IBOutlet weak var playerNumber: UILabel!
     
+    @IBOutlet weak var playerOneScore: UILabel!
+    @IBOutlet weak var playerTwoScore: UILabel!
+    
+    @IBOutlet weak var speedLabel: UILabel!
+    
+    var scorePlayerOne = 0 {
+        didSet {
+            playerOneScore.text = "Player 1: \(scorePlayerOne)"
+        }
+    }
+    
+    var wind = Double(0) {
+        didSet {
+            speedLabel.text = "Wind: \(round(100*wind)/100)"
+        }
+    }
+    
+    var scorePlayerTwo = 0 {
+        didSet {
+            playerTwoScore.text = "Player 2: \(scorePlayerTwo)"
+        }
+    }
     
     @IBAction func angleChanged(_ sender: Any) {
         angleLabel.text = "Angle: \(Int(angleSlider.value))"
@@ -48,6 +70,9 @@ class GameViewController: UIViewController {
         angleChanged(angleSlider ?? "Angle: 45")
         velocityChanged(velocitySlider ?? "Velocity: 125")
 
+        scorePlayerOne = 0
+        scorePlayerTwo = 0
+        wind = Double.random(in: -3...3)
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
