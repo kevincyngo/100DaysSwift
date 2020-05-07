@@ -38,12 +38,12 @@ class ViewController: UIViewController {
     var cards = [Card]()
     
     fileprivate let collectionView: UICollectionView = {
-        let spacing:CGFloat = 16.0
+        let spacing:CGFloat = 15.0
         
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        layout.minimumLineSpacing = 22
-        layout.minimumInteritemSpacing = spacing
+        layout.minimumLineSpacing = 15
+        layout.minimumInteritemSpacing = 0
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(CardCell.self, forCellWithReuseIdentifier: "cell")
@@ -51,14 +51,24 @@ class ViewController: UIViewController {
     }()
     
     func loadData() {
+        
+        
+        var deckOfCards = [String]()
         for suit in Suit.allCases {
             for number in Number.allCases {
-                if(cards.count == 20) {
-                    return
-                }
-                cards.append(Card(front: "\(suit.rawValue)_\(number.rawValue).png"))
+                deckOfCards.append("\(suit.rawValue)_\(number.rawValue).png")
             }
         }
+        deckOfCards.shuffle()
+        
+        for card in deckOfCards {
+            if cards.count == 12 {
+                break
+            }
+            cards.append(Card(front: card))
+
+        }
+        cards += cards
     }
     
     
