@@ -36,6 +36,11 @@ enum Number: String, CaseIterable {
 class ViewController: UIViewController {
     
     var cards = [Card]()
+    var selectedCards = [Card]()
+    
+    //MARK: -Only allow two cards to be flipped at a time
+    //MARK: -Add a nav bar button to allow user to start a new game
+    //MARK: -Add a timer to track how long it takes user to complete
     
     fileprivate let collectionView: UICollectionView = {
         let spacing:CGFloat = 15.0
@@ -112,6 +117,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         guard let cell = collectionView.cellForItem(at: indexPath) as? CardCell else { return }
         cell.toggleClick()
         
